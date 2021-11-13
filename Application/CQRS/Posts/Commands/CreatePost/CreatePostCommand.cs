@@ -10,15 +10,13 @@ namespace Application.CQRS.Posts.Commands.CreatePost
 {
     public sealed class CreatePostCommand : IRequest<PostDto>
     {
-        public CreatePostCommand(long userId, string title, string content, string[] tags)
+        public CreatePostCommand(string title, string content, string[] tags)
         {
             Title = title;
             Content = content;
             Tags = tags;
-            UserId = userId;
         }
         
-        public long UserId { get; }
         public string Title { get; }
         public string Content { get; }
         public string[] Tags { get; }
@@ -27,21 +25,22 @@ namespace Application.CQRS.Posts.Commands.CreatePost
     public class CreatePostCommandHandler : IRequestHandler<CreatePostCommand, PostDto>
     {
         private readonly IPostRepository _postRepository;
-        private readonly ITagsRepository _tagsRepository;
+        private readonly ITagRepository _tagRepository;
         private readonly IMapper _mapper;
 
-        public CreatePostCommandHandler(IPostRepository postRepository, IMapper mapper, ITagsRepository tagsRepository)
+        public CreatePostCommandHandler(IPostRepository postRepository, IMapper mapper, ITagRepository tagRepository)
         {
             _postRepository = postRepository;
+            _tagRepository = tagRepository;
             _mapper = mapper;
-            _tagsRepository = tagsRepository;
         }
 
         public async Task<PostDto> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
-            var existedTags = _tagsRepository.GetQuery()
-                .Where(p => request.Tags.Any(rt => rt == p.TagId));
-            var existedTagIds = existedTags.Select(p => p.TagId);
+            var existedTags = _tagRepository.GetQuery()
+                .Where(p => request.Tags.Any(rt => rt == p.TagId))
+                .ToList();
+            var existedTagIds = existedTags.Select(p => p.TagId).ToList();
             var newTags = request.Tags
                 .Except(existedTagIds)
                 .Select(tag => new Tag
@@ -52,7 +51,6 @@ namespace Application.CQRS.Posts.Commands.CreatePost
             
             var newPost = await _postRepository.AddAsync(new Post
             {
-                UserId = request.UserId,
                 Title = request.Title,
                 Content = request.Content,
                 Tags = existedTags.Concat(newTags).ToList()

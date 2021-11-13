@@ -1,9 +1,10 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Exceptions;
 using Application.Interfaces.Repositories;
 using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.CQRS.Posts.Queries.GetPost
@@ -30,7 +31,10 @@ namespace Application.CQRS.Posts.Queries.GetPost
 
         public Task<PostDto> Handle(GetPostQuery request, CancellationToken cancellationToken)
         {
-            var post = _postRepository.GetQuery().Single(p => p.Id == request.Id);
+            var post = _postRepository.GetQuery().SingleOrDefault(p => p.Id == request.Id);
+            if (post == default) 
+                throw new NotFoundException(nameof(Post), request.Id);
+            
             var postDto = _mapper.Map<PostDto>(post);
             return Task.FromResult(postDto);
         }

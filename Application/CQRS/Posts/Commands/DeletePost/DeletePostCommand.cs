@@ -7,12 +7,10 @@ namespace Application.CQRS.Posts.Commands.DeletePost
 {
     public class DeletePostCommand : IRequest
     {
-        public DeletePostCommand(long id, long userId)
+        public DeletePostCommand(long id)
         {
             this.Id = id;
-            this.UserId = userId;
         }
-        public long UserId { get; }
         public long Id { get; }
     }
 

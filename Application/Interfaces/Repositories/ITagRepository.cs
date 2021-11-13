@@ -6,7 +6,7 @@ using Domain.Entities;
 
 namespace Application.Interfaces.Repositories
 {
-    public interface ITagsRepository
+    public interface ITagRepository
     {
         IQueryable<Tag> GetQuery();
         Task<List<Tag>> GetAsync();

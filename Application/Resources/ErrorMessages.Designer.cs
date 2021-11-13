@@ -61,11 +61,29 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entity &quot;{0}&quot; with id (&quot;{1}&quot;) was not found..
+        /// </summary>
+        internal static string NotFound {
+            get {
+                return ResourceManager.GetString("NotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You do not own this post..
         /// </summary>
         internal static string Post_UserDoNotOwnPost {
             get {
                 return ResourceManager.GetString("Post_UserDoNotOwnPost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One or more validation failures have occurred..
+        /// </summary>
+        internal static string ValidationFailure {
+            get {
+                return ResourceManager.GetString("ValidationFailure", resourceCulture);
             }
         }
     }
