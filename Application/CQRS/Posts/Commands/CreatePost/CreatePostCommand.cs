@@ -40,14 +40,13 @@ namespace Application.CQRS.Posts.Commands.CreatePost
             var existedTags = _tagRepository.GetQuery()
                 .Where(p => request.Tags.Any(rt => rt == p.TagId))
                 .ToList();
-            var existedTagIds = existedTags.Select(p => p.TagId).ToList();
+            var existedTagIds = existedTags.Select(p => p.TagId);
             var newTags = request.Tags
                 .Except(existedTagIds)
                 .Select(tag => new Tag
                 {
                     TagId = tag
-                })
-                .ToList();
+                });
             
             var newPost = await _postRepository.AddAsync(new Post
             {

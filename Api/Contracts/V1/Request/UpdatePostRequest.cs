@@ -2,8 +2,8 @@
 {
     public class UpdatePostRequest
     {
-        public string Title { get; }
-        public string Content { get; }
-        public string[] Tags { get; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string[] Tags { get; set; }
     }
 }

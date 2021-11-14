@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Exceptions;
 using Application.Interfaces.Repositories;
 using AutoMapper;
 using Domain.Entities;
@@ -40,7 +41,8 @@ namespace Application.CQRS.Posts.Commands.UpdatePost
         public async Task<PostDto> Handle(UpdatePostCommand request, CancellationToken cancellationToken)
         {
             var existedTags = _tagRepository.GetQuery()
-                .Where(p => request.Tags.Any(rt => rt == p.TagId));
+                .Where(p => request.Tags.Any(rt => rt == p.TagId))
+                .ToList();
             var existedTagIds = existedTags.Select(p => p.TagId);
             var newTags = request.Tags
                 .Except(existedTagIds)
@@ -49,15 +51,19 @@ namespace Application.CQRS.Posts.Commands.UpdatePost
                     TagId = tag
                 })
                 .ToList();
-            
-            var updatedPost = await _postRepository.AddAsync(new Post
-            {
-                Id = request.PostId,
-                Title = request.Title,
-                Content = request.Content,
-                Tags = existedTags.Concat(newTags).ToList()
-            });
 
+            var existedPost = _postRepository.GetQuery().SingleOrDefault(p => p.Id == request.PostId);
+            if (existedPost == default)
+                throw new NotFoundException(nameof(Post), request.PostId);
+
+            foreach (var tag in existedPost.Tags)
+                existedPost.Tags.Remove(tag);
+
+            existedPost.Title = request.Title;
+            existedPost.Content = request.Content;
+            existedPost.Tags = existedTags.Concat(newTags).ToList();
+            
+            var updatedPost = await _postRepository.UpdateAsync(existedPost);
             return _mapper.Map<PostDto>(updatedPost);
         }
     }

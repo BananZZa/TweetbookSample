@@ -18,12 +18,12 @@ namespace Infrastructure.Persistance.Repositories
 
         public IQueryable<Post> GetQuery()
         {
-            return _applicationDbContext.Posts.AsQueryable();
+            return _applicationDbContext.Posts.Include(p => p.Tags).AsQueryable();
         }
 
         public async Task<List<Post>> GetAsync()
         {
-            return await _applicationDbContext.Posts.ToListAsync();
+            return await _applicationDbContext.Posts.Include(p => p.Tags).ToListAsync();
         }
 
         public async Task<Post> AddAsync(Post entity)

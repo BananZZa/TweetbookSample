@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Api.Contracts.V1.Request
+﻿namespace Api.Contracts.V1.Request
 {
     public class CreatePostRequest
     {

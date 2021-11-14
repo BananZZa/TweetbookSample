@@ -8,7 +8,7 @@ using Application.CQRS.Posts.Queries.GetPost;
 using Application.CQRS.Posts.Queries.GetPosts;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers
+namespace Api.Controllers.V1
 {
     public class PostController : ApiControllerBase
     {
@@ -38,7 +38,7 @@ namespace Api.Controllers
         [HttpPut(ApiRoutes.Post.Update)]
         public async Task<IActionResult> Update(long postId, UpdatePostRequest request)
         {
-            var result = await Mediator.Send(new UpdatePostCommand(postId, request.Title, request.Content,
+             var result = await Mediator.Send(new UpdatePostCommand(postId, request.Title, request.Content,
                 request.Tags));
             return Ok(result);
         }
