@@ -1,3 +1,4 @@
+using System;
 using Application;
 using Infrastructure.Persistance;
 using Microsoft.AspNetCore.Builder;
@@ -31,8 +32,29 @@ namespace Api
                 {
                     Title = "Api", Version = "v1"
                 });
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "JWT Authorization header using bearer scheme",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement 
+                {
+                    { 
+                        new OpenApiSecurityScheme 
+                        { 
+                            Reference = new OpenApiReference 
+                            { 
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer" 
+                            } 
+                        },
+                        Array.Empty<string>()
+                    } 
+                });
             });
-            services.AddApplication();
+            services.AddApplication(_configuration);
             services.AddPersistance(_configuration);
         }
 

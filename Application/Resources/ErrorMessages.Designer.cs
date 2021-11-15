@@ -61,6 +61,78 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User with specified email address already exist.
+        /// </summary>
+        internal static string EmailAlreadyExist {
+            get {
+                return ResourceManager.GetString("EmailAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid Token.
+        /// </summary>
+        internal static string JwtInvalidToken {
+            get {
+                return ResourceManager.GetString("JwtInvalidToken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This token hasn&apos;t expired yet.
+        /// </summary>
+        internal static string JwtNotExpired {
+            get {
+                return ResourceManager.GetString("JwtNotExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This refresh token has expired.
+        /// </summary>
+        internal static string JwtRefreshExpired {
+            get {
+                return ResourceManager.GetString("JwtRefreshExpired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This refresh token has been invalidated.
+        /// </summary>
+        internal static string JwtRefreshInvalidated {
+            get {
+                return ResourceManager.GetString("JwtRefreshInvalidated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This refresh token does not exist.
+        /// </summary>
+        internal static string JwtRefreshNotExist {
+            get {
+                return ResourceManager.GetString("JwtRefreshNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This refresh token does not match this JWT.
+        /// </summary>
+        internal static string JwtRefreshNotMatchJwt {
+            get {
+                return ResourceManager.GetString("JwtRefreshNotMatchJwt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This refresh token has been used.
+        /// </summary>
+        internal static string JwtRefreshUsed {
+            get {
+                return ResourceManager.GetString("JwtRefreshUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Entity &quot;{0}&quot; with id (&quot;{1}&quot;) was not found..
         /// </summary>
         internal static string NotFound {
@@ -79,11 +151,29 @@ namespace Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User does not exist.
+        /// </summary>
+        internal static string UserDoesNotExist {
+            get {
+                return ResourceManager.GetString("UserDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to One or more validation failures have occurred..
         /// </summary>
         internal static string ValidationFailure {
             get {
                 return ResourceManager.GetString("ValidationFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User/password combination is wrong.
+        /// </summary>
+        internal static string WrongPassword {
+            get {
+                return ResourceManager.GetString("WrongPassword", resourceCulture);
             }
         }
     }

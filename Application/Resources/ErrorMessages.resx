@@ -27,4 +27,34 @@
     <data name="ValidationFailure" xml:space="preserve">
         <value>One or more validation failures have occurred.</value>
     </data>
+    <data name="EmailAlreadyExist" xml:space="preserve">
+        <value>User with specified email address already exist</value>
+    </data>
+    <data name="UserDoesNotExist" xml:space="preserve">
+        <value>User does not exist</value>
+    </data>
+    <data name="WrongPassword" xml:space="preserve">
+        <value>User/password combination is wrong</value>
+    </data>
+    <data name="JwtInvalidToken" xml:space="preserve">
+        <value>Invalid Token</value>
+    </data>
+    <data name="JwtNotExpired" xml:space="preserve">
+        <value>This token hasn't expired yet</value>
+    </data>
+    <data name="JwtRefreshNotExist" xml:space="preserve">
+        <value>This refresh token does not exist</value>
+    </data>
+    <data name="JwtRefreshExpired" xml:space="preserve">
+        <value>This refresh token has expired</value>
+    </data>
+    <data name="JwtRefreshInvalidated" xml:space="preserve">
+        <value>This refresh token has been invalidated</value>
+    </data>
+    <data name="JwtRefreshUsed" xml:space="preserve">
+        <value>This refresh token has been used</value>
+    </data>
+    <data name="JwtRefreshNotMatchJwt" xml:space="preserve">
+        <value>This refresh token does not match this JWT</value>
+    </data>
 </root>
